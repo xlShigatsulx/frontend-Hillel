@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson3</title>
+</head>
+<body>
+    <script>
+        let bigMessage = "";
+        let message = "";
+
+        for(let i = 0; i < 3; i++)
+        {
+            message = prompt("Enter your value", "");
+            bigMessage = `${bigMessage} ${message} \n`;
+        }
+
+        console.log(bigMessage);
+    </script>
+</body>
+</html>

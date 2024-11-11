@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lesson3</title>
+</head>
+<body>
+    <script>
+        let message = "";
+        for(let i = 0; i < 1;)
+        {
+            message = prompt("Enter your five-digit number", "");
+            message = Number(message);
+            if(!isNaN(message))
+            {
+                if(Number.isInteger(message) && Math.abs(message) >= 10000 && Math.abs(message) <= 99999) // Math.abs(message) нужен для того чтобы "-" не влиял на число
+                {
+                    message = String(message);
+                    for(let i = 0; i < message.length; i++)
+                        console.log(message.split('').join(' '));
+                    i++;
+                }
+                else
+                    alert("You enter not five-digit number! Please try again :)");
+            }
+            else
+                alert("You enter not five-digit number! Please try again :)");
+            
+        }
+        
+    </script>
+</body>
+</html>
