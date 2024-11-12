@@ -7,6 +7,8 @@
 </head>
 <body>
     <script>
+        function foo(){return function() {}}
+
         console.log(typeof 8);
         console.log(typeof 8n);
         console.log(typeof "hello :)");
@@ -14,6 +16,9 @@
         console.log(typeof undefined);
         console.log(typeof null);
         console.log(typeof Symbol("id"));
+        console.log(typeof {});
+        console.log(typeof []);
+        console.log(typeof foo());
     </script>
 </body>
 </html>
