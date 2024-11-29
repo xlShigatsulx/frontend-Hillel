@@ -17,7 +17,7 @@ function getNumberAbove100() {
 		const number = Number(input);
         lastInput = number
 
-		if (validNumber(number) && number > 100 && number !== '') {
+		if (validNumber(number) && number > 100) {
 			lastInput = number
 			return console.log(`Last input: ${lastInput}`);
 		} else {
