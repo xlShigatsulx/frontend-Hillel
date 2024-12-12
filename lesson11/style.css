@@ -1,0 +1,35 @@
+.title {
+     text-align: center;
+}
+.table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #f4f4f4;
+}
+
+.button {
+    background-color: #8a8a8a;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #6b6b6b;
+}
+
+.button:active {
+    background-color: #3d3d3d;
+}
