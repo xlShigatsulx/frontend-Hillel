@@ -24,5 +24,5 @@ function colorChanger(){
     };
 }
 
-const changeColor = colorChanger();
-button.addEventListener('click', changeColor);
+const changeColorHandler = colorChanger();
+button.addEventListener('click', changeColorHandler);
