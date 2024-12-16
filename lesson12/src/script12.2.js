@@ -23,6 +23,7 @@ document.body.appendChild(div);
 div.addEventListener('click', (e) => {
     if(e.target.tagName === 'BUTTON') {
         const buttonNumber = e.target.dataset.button;
+        alert(`Clicked button №${buttonNumber}`);
         console.log(`Clicked button №${buttonNumber}`);
     }
 });
