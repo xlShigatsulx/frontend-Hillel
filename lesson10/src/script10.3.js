@@ -6,19 +6,6 @@ const contacts = [
 	}
 ];
 
-/*let idCounter = 1
-function Contact({ name, phone, email }) {
-    Object.defineProperty(this, 'id', {
-        value: (idCounter++).toString(),
-        writable: false,
-        configurable: false,
-        enumerable: false
-    });
-	this.name = name;
-	this.phone = phone;
-	this.email = email;
-};*/
-
 const ContactConstructor = () => {
     let idCounter = 1;
 

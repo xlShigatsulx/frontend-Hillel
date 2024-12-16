@@ -1,0 +1,56 @@
+body {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.list {
+    padding-left: 20px;
+}
+
+.newLi {
+    margin-top: 5px;
+}
+
+.buttonInput {
+    margin-left: 10px;
+}
+
+.newButton {
+    margin-left: 10px;
+}
+
+.button1,
+.button2,
+.button3 {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #767e86;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.button1,
+.button2 {
+    margin-right: 20px;
+}
+
+.button1:hover,
+.button2:hover,
+.button3:hover {
+    background-color: #51575c;
+}
+
+.button1:active,
+.button2:active,
+.button3:active {
+    background-color: #383c3f;
+    transform: scale(0.98);
+}
