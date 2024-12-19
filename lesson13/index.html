@@ -9,27 +9,34 @@
 </head>
 <body>
     <div class="conteiner">
-        <form class="fist-form">
+        <form class="fist-form" name="form">
             <h1 class="title-form">We would like to help you</h1>
-            <input type="text" class="form-control" name="user-name" placeholder="Name">
+            <input 
+                type="text" 
+                class="form-control" 
+                name="name" 
+                placeholder="Name">
             <textarea 
-                name="textarea" 
-                class="textarea-form" 
-                placeholder="Massage" 
+                class="textarea-form"
+                name="textarea"
+                placeholder="Massage"
                 rows="4" ></textarea>
             <div class="sub-title-form">HOW TO ANSWER YOU?</div>
             <input 
                 type="tel" 
                 class="form-control" 
-                name="tel" 
+                name="phone" 
                 placeholder="Phone number">
             <input 
                 type="email" 
                 class="form-control" 
-                aria-describedby="emailHelp" 
-                name="email"
-                placeholder="Email">
-            <button type="submit" class="btn-submit-form">Send message</button>
+                name="email" 
+                placeholder="Email"
+                aria-describedby="emailHelp">
+            <button 
+                type="submit" 
+                class="btn-submit-form" 
+                name="submit">Send message</button>
         </form>
     </div>
 </body>
