@@ -15,7 +15,7 @@ function createEl({ type = 'div', content, attributes  } = {}) {
 const validators = {
   name: value => value.trim() !== '' || '*Required text field!',
   textarea: value => /^.{5,}$/.test(value) || '*Message must be at least 5 characters long',
-  phone: value => /^\+380\d{9}$/.test(value) || '*Phone number must start with +380 and contain 9 digits.',
+  tel: value => /^\+380\d{9}$/.test(value) || '*Phone number must start with +380 and contain 9 digits.',
   email: value => /^[a-zA-Z0-9.+-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test(value) || '*Email must contain "@" and a dot.'
 };
 
@@ -55,7 +55,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-        console.log(`Name: ${form.elements.name.value.trim()},\nMessage: ${form.elements.textarea.value.trim()},\nPhone number: ${form.elements.phone.value.trim()},\nEmail: ${form.elements.email.value.trim()}.`);
+        console.log(`Name: ${form.elements.name.value.trim()},\nMessage: ${form.elements.textarea.value.trim()},\nPhone number: ${form.elements.tel.value.trim()},\nEmail: ${form.elements.email.value.trim()}.`);
         const successLabel = createEl({
             type: 'label',
             content: 'Success!',
@@ -64,11 +64,13 @@ form.addEventListener('submit', (e) => {
         form.elements.submit.insertAdjacentElement('afterend', successLabel);
 
         form.reset();
-        document.querySelectorAll('.errorLabel').forEach(label => label.remove());
     }
 });
 
 form.addEventListener('input', (e) => {
+    const successLabel = form.querySelector('.successLabel');
+    if (successLabel) successLabel.remove();
+
     const { name, value } = e.target;
     if (validators[name]) validateField(name, value.trim());
 });
