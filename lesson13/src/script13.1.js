@@ -21,34 +21,48 @@ const validators = {
 
 const form = document.forms.form;
 
-function validateField(name, value) {
+function isFieldValid(name, value) {
     const validateFn = validators[name];
-    if (!validateFn) return true;
-    const result = validateFn(value);
+    return validateFn ? validateFn(value) : true;
+}
 
-    const error = form.elements[name].parentElement.querySelector(`[data-error-for="${name}"]`);
-    if (result !== true) {
-        if (!error) {
-            const errorLabel = createEl({
-                type: 'label',
-                content: result,
-                attributes: { class: 'errorLabel', 'data-error-for': name }
-            });
-            form.elements[name].insertAdjacentElement('afterend', errorLabel);
-        }
-    } else {
-        if (error) error.remove();
+function showFieldError(name, message) {
+    const parent = form.elements[name].parentElement;
+    const error = Array.from(parent.children).find(child => child.dataset.errorFor === name);
+
+    if (!error) {
+        const errorLabel = createEl({
+            type: 'label',
+            content: message,
+            attributes: { class: 'errorLabel', 'data-error-for': name }
+        });
+        form.elements[name].insertAdjacentElement('afterend', errorLabel);
     }
-    return result === true;
+}
+
+function clearFieldError(name) {
+    const parent = form.elements[name].parentElement;
+    const error = Array.from(parent.children).find(child => child.dataset.errorFor === name);
+    if (error) error.remove();
+}
+
+function validateField(name, value) {
+    const isValid = isFieldValid(name, value);
+
+    if (isValid !== true) {
+        showFieldError(name, isValid);
+    } else {
+        clearFieldError(name);
+    }
+
+    return isValid === true;
 }
 
 function validateForm() {
-    let isValid = true;
-    Object.entries(validators).forEach(([name]) => {
+    return Object.entries(validators).every(([name]) => {
         const value = form.elements[name]?.value.trim();
-        if (!validateField(name, value)) isValid = false;
+        return validateField(name, value);
     });
-    return isValid;
 }
 
 form.addEventListener('submit', (e) => {
@@ -68,7 +82,7 @@ form.addEventListener('submit', (e) => {
 });
 
 form.addEventListener('input', (e) => {
-    const successLabel = form.querySelector('.successLabel');
+    const successLabel = Array.from(form.children).find(child => child.classList.contains('successLabel'));
     if (successLabel) successLabel.remove();
 
     const { name, value } = e.target;
