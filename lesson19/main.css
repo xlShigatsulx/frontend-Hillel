@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(120deg, #e0f7fa, #80deea);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background: #5031ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.titleChoices {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #949494;
+    border-radius: 5px;
+    background: #afafaf;
+    font-size: 16px;
+    color: #ffffff;
+    outline: none;
+}
+
+select:focus {
+    border-color: #8f8f8f;
+}
+
+.weatherDetails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.weatherDetails label {
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    background: #4dffe1;
+    text-align: center;
+    font-weight: bold;
+    color: #000000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.weatherDetails label:nth-child(odd) {
+    background: #8bdfff;
+}
+
+.btnWeatherForm {
+    align-self: center;
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btnWeatherForm:hover {
+    background: #5031ff;
+}
+
+.weatherIcon {
+    align-self: center;
+    height: 250px;
+    width: 250px;
+}
