@@ -148,12 +148,12 @@ function extractSpecificFields(data) {
 	}
 
   	const unitMapping = {
-		temp: '°C',
-		pressure: 'hPa',
-		humidity: '%',
-		feels_like: '%',
-		speed: 'м/с',
-	}
+			temp: '°C',
+			pressure: 'hPa',
+			humidity: '%',
+			feels_like: '°C',
+			speed: 'м/с',
+		}
 
 	const fields = Object.keys(fieldMapping)
 	const result = [
@@ -161,15 +161,25 @@ function extractSpecificFields(data) {
 		{ key: 'Час:', value: getTimeNow() },
 	]
 
-  	function extract(obj) {
+	function extract(obj) {
 		for (const [key, value] of Object.entries(obj)) {
 			if (fields.includes(key)) {
 				const displayKey = fieldMapping[key]
 				const unit = unitMapping[key] || ''
-				const formattedValue =
-					typeof value === 'number' ? `${value} ${unit}` : value
+				let formattedValue = value
 
-				result.push({ key: displayKey, value: formattedValue })
+				if (key === 'temp' || key === 'feels_like') {
+					formattedValue = formattedValue - 273.15;
+				}
+
+				if (typeof formattedValue === 'number') {
+					result.push({
+						key: displayKey,
+						value: `${formattedValue.toFixed(0)} ${unit}`,
+					})
+				} else {
+					result.push({ key: displayKey, value: formattedValue })
+				}
 			} else if (typeof value === 'object' && value !== null) {
 				extract(value)
 			} else if (Array.isArray(value)) {
