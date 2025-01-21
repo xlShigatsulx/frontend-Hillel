@@ -145,17 +145,29 @@ class WeatherManager {
 }
 
 async function fetchWeatherData(cityName) {
-    let weatherData;
+    try {
+        const apiKey = "d0a8f0783e0adcf8a62cd353c611c113";
+        const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
 
-    const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName},ua&appid=d0a8f0783e0adcf8a62cd353c611c113`);
-    if (!res.ok) {
-        throw new Error(`API error: ${res.statusText}`);
+        const url = new URL(baseUrl);
+        url.searchParams.append("q", `${cityName},ua`);
+        url.searchParams.append("appid", apiKey);
+
+        const res = await fetch(url);
+
+        if (!res.ok) {
+            throw new Error(`API Error: ${res.status} - ${res.statusText}`);
+        }
+
+        const data = await res.json();
+
+        return data || [];
+    } catch (error) {
+        console.error("Failed to load weather data:", error.message);
+        return null;
     }
-    const data = await res.json();
-
-    weatherData = data || []
-    return weatherData
 }
+
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
