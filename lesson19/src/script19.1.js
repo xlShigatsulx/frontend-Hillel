@@ -41,64 +41,22 @@ class WeatherManager {
 		if (updateButton) updateButton.remove()
 	}
 
-	getDateNow(locale = 'uk-UA') {
-		const now = new Date()
-		return now.toLocaleDateString(locale, {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-		})
-	}
-
-	getTimeNow(locale = 'uk-UA') {
-		const now = new Date()
-		return now.toLocaleTimeString(locale, {
-			hour: '2-digit',
-			minute: '2-digit',
-		})
-	}
-
 	createWeatherBox(data) {
         const containerUl = this.createEl({
             type: 'ul',
             attributes: { class: "weatherInfo"}
         })
-		const dateNow = this.createEl({
-			type: 'li',
-			content: `Дата: ${this.getDateNow()}`,
+
+		data.forEach( (item) => {
+			if (item.key === 'Icon') return;
+			const el = this.createEl({
+				type: 'li',
+				content: `${item.key} ${item.value}`
+			});
+
+			containerUl.appendChild(el);
 		})
-		const timeNow = this.createEl({
-			type: 'li',
-			content: `Час: ${this.getTimeNow()}`,
-		})
-        const name = this.createEl({
-            type: 'li',
-            content: `Місце: ${data?.name}`
-        })
-		const humidity = this.createEl({
-			type: 'li',
-			content: `Вологість: ${data?.main?.humidity ?? 'N/A'} %`,
-		})
-		const pressure = this.createEl({
-			type: 'li',
-			content: `Тиск: ${data?.main?.pressure ?? 'N/A'} hPa`,
-		})
-		const temp = this.createEl({
-			type: 'li',
-			content: `Температура: ${
-				Math.round(data?.main?.temp - 273.15) ?? 'N/A'
-			} °C`,
-		})
-		const feelsLike = this.createEl({
-			type: 'li',
-			content: `Відчувається як: ${
-				Math.round(data?.main?.feels_like - 273.15) ?? 'N/A'
-			} °C`,
-		})
-		const wind = this.createEl({
-			type: 'li',
-			content: `Вітер: ${data?.wind?.speed ?? 'N/A'} м/с`,
-		})
+
 		const btnIcon = this.createEl({
 			type: 'i',
 			attributes: { class: 'fas fa-sync-alt' },
@@ -108,41 +66,51 @@ class WeatherManager {
 			content: btnIcon,
 			attributes: { class: 'btnWeatherUpDate' },
 		})
+
+		const iconId = data.find(item => item.key === 'Icon').value;
 		const icon = this.createEl({
 			type: 'img',
 			attributes: {
-				src: `https://openweathermap.org/img/wn/${data?.weather[0]?.icon}@2x.png`,
+				src: `https://openweathermap.org/img/wn/${iconId}@2x.png`,
 				class: 'weatherIcon',
 			},
 		})
 
 		btnUpDate.addEventListener('click', async () => {
 			try {
-				this.removeIconAndButton()
-				this.clearContent(container)
+				this.removeIconAndButton();
+				this.clearContent(container);
 
-				const cityName = selectElement.value
-				const weatherData = await fetchWeatherData(cityName)
+				const cityName = selectElement.value;
+				const weatherData = await fetchWeatherData(cityName);
 
-				this.createWeatherBox(weatherData)
-				console.log('Weather data updated successfully!')
+				this.createWeatherBox(extractSpecificFields(weatherData));
+				console.log('Weather data updated successfully!');
 			} catch (error) {
-				console.error('Failed to update weather data:', error)
+				console.error('Failed to update weather data:', error);
 			}
 		})
-		containerUl.append(
-			dateNow,
-			timeNow,
-            name,
-			humidity,
-			pressure,
-			temp,
-			feelsLike,
-			wind
-		)
-        container.append(containerUl, icon, btnUpDate)
+
+        container.append(containerUl, icon, btnUpDate);
 	}
 }
+
+	function getDateNow(locale = 'uk-UA') {
+		const now = new Date()
+		return now.toLocaleDateString(locale, {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		})
+	}
+
+	function getTimeNow(locale = 'uk-UA') {
+		const now = new Date()
+		return now.toLocaleTimeString(locale, {
+			hour: '2-digit',
+			minute: '2-digit',
+		})
+	}
 
 async function fetchWeatherData(cityName) {
     try {
@@ -168,6 +136,55 @@ async function fetchWeatherData(cityName) {
     }
 }
 
+function extractSpecificFields(data) {
+	const fieldMapping = {
+		name: 'Місце:',
+		humidity: 'Вологість:',
+		pressure: 'Тиск:',
+		temp: 'Температура:',
+		feels_like: 'Відчувається як:',
+		speed: 'Вітер:',
+		icon: 'Icon',
+	}
+
+  	const unitMapping = {
+		temp: '°C',
+		pressure: 'hPa',
+		humidity: '%',
+		feels_like: '%',
+		speed: 'м/с',
+	}
+
+	const fields = Object.keys(fieldMapping)
+	const result = [
+		{ key: 'Дата:', value: getDateNow() },
+		{ key: 'Час:', value: getTimeNow() },
+	]
+
+  	function extract(obj) {
+		for (const [key, value] of Object.entries(obj)) {
+			if (fields.includes(key)) {
+				const displayKey = fieldMapping[key]
+				const unit = unitMapping[key] || ''
+				const formattedValue =
+					typeof value === 'number' ? `${value} ${unit}` : value
+
+				result.push({ key: displayKey, value: formattedValue })
+			} else if (typeof value === 'object' && value !== null) {
+				extract(value)
+			} else if (Array.isArray(value)) {
+				value.forEach(item => {
+					if (typeof item === 'object' && item !== null) {
+						extract(item)
+					}
+				})
+			}
+		}
+	}
+
+	extract(data)
+	return result
+}
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -180,7 +197,7 @@ form.addEventListener('submit', async (e) => {
 
 		const weatherData = await fetchWeatherData(cityName)
 
-		weatherManager.createWeatherBox(weatherData)
+		weatherManager.createWeatherBox(extractSpecificFields(weatherData))
 		console.log('Weather data load successfully!')
 	} catch (error) {
 		console.error('Failed to load weather data:', error)
@@ -201,7 +218,7 @@ form.addEventListener('submit', async (e) => {
                         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=d0a8f0783e0adcf8a62cd353c611c113`);
                         const weatherData = await res.json();
 
-                        weatherManager.createWeatherBox(weatherData);
+                        weatherManager.createWeatherBox(extractSpecificFields(weatherData));
                         console.log('Weather data load successfully!');
                     } catch (error) {
                         console.error('Failed to load weather data:', error);
