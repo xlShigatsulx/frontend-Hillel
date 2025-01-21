@@ -10,17 +10,20 @@
 </head>
 <body>
     <div class="container">
-        <label class="titleChoices" for="choices">Оберіть місто:</label>
-        <select name="choices">
-            <option value="Kyiv">Київ</option>
-            <option value="Odessa">Одеса</option>
-            <option value="Kharkiv">Харків</option>
-            <option value="Zaporizhzhia">Запоріжжя</option>
-            <option value="Donetsk">Донецьк</option>
-        </select>
+        <form>
+            <fieldset>
+                <legend class="titleChoices">Оберіть місто:</legend>
+                <select name="choices">
+                    <option value="Kyiv">Київ</option>
+                    <option value="Odessa">Одеса</option>
+                    <option value="Kharkiv">Харків</option>
+                    <option value="Zaporizhzhia">Запоріжжя</option>
+                    <option value="Donetsk">Донецьк</option>
+                </select>
+            </fieldset>
+            <button type="submit" class="btnSubmitForm">Показати погоду</button>
+        </form>
         <div class="weatherDetails">
-            <form name="weatherForm">
-            </form>
         </div>
     </div>
 </body>
