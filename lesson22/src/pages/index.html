@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <fieldset>
+          <legend class="titleChoices">Оберіть місто:</legend>
+          <select name="choices">
+            <option value="Kyiv">Київ</option>
+            <option value="Odessa">Одеса</option>
+            <option value="Kharkiv">Харків</option>
+            <option value="Zaporizhzhia">Запоріжжя</option>
+            <option value="Donetsk">Донецьк</option>
+          </select>
+        </fieldset>
+        <button type="submit" class="btnSubmitForm">Показати погоду</button>
+      </form>
+      <div class="weatherDetails"></div>
+    </div>
+  </body>
+</html>
