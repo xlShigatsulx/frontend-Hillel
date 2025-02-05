@@ -25,8 +25,8 @@ $(document).on("change", ".todo-checkbox", async (e) => {
     await TodoAPI.update(process.env.BASE_SERVICE_URL, todoId, {
       completed: isCompleted,
     });
-  } catch (error) {
-    console.error("Error while updating status todo:", error);
+  } catch (e) {
+    fetchErrorHandler(e);
     $item.toggleClass("todo-completed", !isCompleted);
   }
 });
@@ -53,7 +53,7 @@ $(document).on("click", ".delete-btn", async (e) => {
     });
     await fetchTodos();
   } catch (e) {
-    console.error("Error while deleting todo:", e);
+    fetchErrorHandler(e);
   }
 });
 
@@ -98,7 +98,6 @@ $(document).on("click", ".edit-btn", (e) => {
     if (!updatedTitle) return;
 
     const updatedData = {
-      _id: todoId,
       title: updatedTitle,
       description: updatedDescription,
       completed: isCompleted,
@@ -116,8 +115,8 @@ $(document).on("click", ".edit-btn", (e) => {
       );
 
       $item.replaceWith($updatedItem);
-    } catch (error) {
-      console.error("Error while updating todo:", error);
+    } catch (e) {
+      fetchErrorHandler(e);
     }
   });
 
