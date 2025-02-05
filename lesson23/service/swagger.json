@@ -1,0 +1,150 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Todo CRUD API",
+    "description": "Swagger documentation"
+  },
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/todos": {
+      "get": {
+        "summary": "Get all todos",
+        "responses": {
+          "200": {
+            "description": "A list of todos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Todo"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new todo",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewTodo"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Item created"
+          }
+        }
+      }
+    },
+    "/todos/{id}": {
+      "get": {
+        "summary": "Get todo by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": "63d94b8e9f1f1e25d4c5b8e8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Item details",
+            "schema": {
+              "$ref": "#/definitions/Todo"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update todo by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": "63d94b8e9f1f1e25d4c5b8e8"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewTodo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Todo updated"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete todo by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "default": "63d94b8e9f1f1e25d4c5b8e8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Todo deleted"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Todo": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "63d94b8e9f1f1e25d4c5b8e8"
+        },
+        "title": {
+          "type": "string",
+          "example": "Sample title"
+        },
+        "description": {
+          "type": "string",
+          "example": "Sample description"
+        },
+        "completed": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "NewTodo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Sample title"
+        },
+        "description": {
+          "type": "string",
+          "example": "Sample description"
+        },
+        "completed": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    }
+  }
+}
