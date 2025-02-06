@@ -14,7 +14,7 @@ $(document).ready(fetchTodos);
 
 $form.on("submit", handleFormSubmit);
 
-$(document).on("change", ".todo-checkbox", async (e) => {
+$contentContainer.on("change", ".todo-checkbox", async (e) => {
   const $item = $(e.target).closest(".todo-item");
   const todoId = $item.data("id");
   const isCompleted = $(e.target).is(":checked");
@@ -31,7 +31,7 @@ $(document).on("change", ".todo-checkbox", async (e) => {
   }
 });
 
-$(document).on("click", ".toggle-description", (e) => {
+$contentContainer.on("click", ".toggle-description", (e) => {
   const $item = $(e.target).closest(".todo-item");
   const $content = $item.find(".todo-content");
   const $icon = $item.find("i");
@@ -41,7 +41,7 @@ $(document).on("click", ".toggle-description", (e) => {
   $icon.toggleClass("fa-chevron-down fa-chevron-up");
 });
 
-$(document).on("click", ".delete-btn", async (e) => {
+$contentContainer.on("click", ".delete-btn", async (e) => {
   const $item = $(e.target).closest(".todo-item");
   const todoId = $item.data("id");
 
@@ -57,7 +57,7 @@ $(document).on("click", ".delete-btn", async (e) => {
   }
 });
 
-$(document).on("click", ".edit-btn", (e) => {
+$contentContainer.on("click", ".edit-btn", (e) => {
   const $item = $(e.target).closest(".todo-item");
   const todoId = $item.data("id");
   const isCompleted = $item.find(".todo-checkbox").is(":checked");
