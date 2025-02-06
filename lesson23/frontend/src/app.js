@@ -7,6 +7,7 @@ import "./styles/main.scss";
 
 const $form = $("form");
 const $contentContainer = $("[data-content]");
+const baseServUrl = process.env.BASE_SERVICE_URL;
 
 const view = new TodosManager($contentContainer);
 
@@ -28,7 +29,7 @@ async function handleFormSubmit(e) {
   const data = { title, description };
 
   try {
-    await TodoAPI.save(process.env.BASE_SERVICE_URL, data);
+    await TodoAPI.save(baseServUrl, data);
     await fetchTodos();
   } catch (e) {
     fetchErrorHandler(e);
@@ -44,7 +45,7 @@ async function handleCheckboxChange(e) {
   $item.toggleClass("todo-completed", isCompleted);
 
   try {
-    await TodoAPI.update(process.env.BASE_SERVICE_URL, todoId, {
+    await TodoAPI.update(baseServUrl, todoId, {
       completed: isCompleted,
     });
   } catch (e) {
@@ -67,9 +68,7 @@ async function handleTodoDelete(e) {
   const $item = $(e.target).closest(".todo-item");
   const todoId = $item.data("id");
 
-  await handleApiRequest(() =>
-    TodoAPI.delete(process.env.BASE_SERVICE_URL, todoId)
-  );
+  await handleApiRequest(() => TodoAPI.delete(baseServUrl, todoId));
   $item.fadeOut(300, function () {
     $(this).remove();
   });
@@ -98,10 +97,10 @@ async function handleTodoEdit(e) {
       completed: isCompleted,
     };
     await handleApiRequest(() =>
-      TodoAPI.update(process.env.BASE_SERVICE_URL, todoId, updatedData)
+      TodoAPI.update(baseServUrl, todoId, updatedData)
     );
 
-    const todo = await TodoAPI.getById(process.env.BASE_SERVICE_URL, todoId);
+    const todo = await TodoAPI.getById(baseServUrl, todoId);
     const $updatedItem = createTodoItem(
       todo._id,
       todo.title,
@@ -135,7 +134,7 @@ async function fetchTodos() {
   view.renderLoader("loading");
 
   try {
-    const todos = await TodoAPI.getAll(process.env.BASE_SERVICE_URL);
+    const todos = await TodoAPI.getAll(baseServUrl);
     view.renderData(todos);
   } catch (e) {
     fetchErrorHandler(e);

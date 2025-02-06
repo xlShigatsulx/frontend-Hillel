@@ -24,7 +24,7 @@ export class TodosManager {
 
     data.forEach(({ _id, title, description, completed }) => {
       const $item = createTodoItem(_id, title, description, completed);
-      $list.append($item);
+      $list.prepend($item);
     });
 
     this.root.append($list);
