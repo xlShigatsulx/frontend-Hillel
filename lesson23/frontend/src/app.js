@@ -13,124 +13,10 @@ const view = new TodosManager($contentContainer);
 $(document).ready(fetchTodos);
 
 $form.on("submit", handleFormSubmit);
-
-$contentContainer.on("change", ".todo-checkbox", async (e) => {
-  const $item = $(e.target).closest(".todo-item");
-  const todoId = $item.data("id");
-  const isCompleted = $(e.target).is(":checked");
-
-  $item.toggleClass("todo-completed", isCompleted);
-
-  try {
-    await TodoAPI.update(process.env.BASE_SERVICE_URL, todoId, {
-      completed: isCompleted,
-    });
-  } catch (e) {
-    fetchErrorHandler(e);
-    $item.toggleClass("todo-completed", !isCompleted);
-  }
-});
-
-$contentContainer.on("click", ".toggle-description", (e) => {
-  const $item = $(e.target).closest(".todo-item");
-  const $content = $item.find(".todo-content");
-  const $icon = $item.find("i");
-  const isCollapsed = $content.hasClass("collapsed");
-
-  $content.toggleClass("collapsed", !isCollapsed);
-  $icon.toggleClass("fa-chevron-down fa-chevron-up");
-});
-
-$contentContainer.on("click", ".delete-btn", async (e) => {
-  const $item = $(e.target).closest(".todo-item");
-  const todoId = $item.data("id");
-
-  try {
-    await TodoAPI.delete(process.env.BASE_SERVICE_URL, todoId);
-
-    $item.fadeOut(300, function () {
-      $(this).remove();
-    });
-    await fetchTodos();
-  } catch (e) {
-    fetchErrorHandler(e);
-  }
-});
-
-$contentContainer.on("click", ".edit-btn", (e) => {
-  const $item = $(e.target).closest(".todo-item");
-  const todoId = $item.data("id");
-  const isCompleted = $item.find(".todo-checkbox").is(":checked");
-  const currentTitle = $item.find(".todo-title").text();
-  const currentDescription = $item.find(".todo-description").text();
-
-  const $editForm = $("<div>")
-    .addClass("edit-form")
-    .append(
-      $("<label>").text("Task title:"),
-      $("<input>")
-        .attr("type", "text")
-        .val(currentTitle)
-        .addClass("edit-input"),
-      $("<label>").text("Task description:"),
-      $("<input>")
-        .attr("type", "text")
-        .val(currentDescription)
-        .addClass("edit-input"),
-      $("<div>")
-        .addClass("button-container")
-        .append(
-          $("<button>")
-            .addClass("save-btn")
-            .append($("<i>").addClass("fas fa-cloud-upload-alt").text(" Save")),
-          $("<button>")
-            .addClass("cancel-btn")
-            .append($("<i>").addClass("fas fa-arrow-left").text(" Cancel"))
-        )
-    );
-
-  $item.empty().append($editForm);
-
-  $editForm.find(".save-btn").on("click", async () => {
-    const updatedTitle = $editForm.find(".edit-input").eq(0).val();
-    const updatedDescription = $editForm.find(".edit-input").eq(1).val();
-
-    if (!updatedTitle) return;
-
-    const updatedData = {
-      title: updatedTitle,
-      description: updatedDescription,
-      completed: isCompleted,
-    };
-
-    try {
-      await TodoAPI.update(process.env.BASE_SERVICE_URL, todoId, updatedData);
-      const todo = await TodoAPI.getById(process.env.BASE_SERVICE_URL, todoId);
-
-      const $updatedItem = createTodoItem(
-        todo._id,
-        todo.title,
-        todo.description,
-        todo.completed
-      );
-
-      $item.replaceWith($updatedItem);
-    } catch (e) {
-      fetchErrorHandler(e);
-    }
-  });
-
-  $editForm.find(".cancel-btn").on("click", () => {
-    console.log("cancel btn");
-    const $beforeUpdateItem = createTodoItem(
-      todoId,
-      currentTitle,
-      currentDescription,
-      isCompleted
-    );
-    $item.replaceWith($beforeUpdateItem);
-  });
-});
+$contentContainer.on("change", ".todo-checkbox", handleCheckboxChange);
+$contentContainer.on("click", ".toggle-description", handleDescriptionToggle);
+$contentContainer.on("click", ".delete-btn", handleTodoDelete);
+$contentContainer.on("click", ".edit-btn", handleTodoEdit);
 
 async function handleFormSubmit(e) {
   e.preventDefault();
@@ -150,6 +36,101 @@ async function handleFormSubmit(e) {
   e.target.reset();
 }
 
+async function handleCheckboxChange(e) {
+  const $item = $(e.target).closest(".todo-item");
+  const todoId = $item.data("id");
+  const isCompleted = $(e.target).is(":checked");
+
+  $item.toggleClass("todo-completed", isCompleted);
+
+  try {
+    await TodoAPI.update(process.env.BASE_SERVICE_URL, todoId, {
+      completed: isCompleted,
+    });
+  } catch (e) {
+    $item.toggleClass("todo-completed", !isCompleted);
+    fetchErrorHandler(e);
+  }
+}
+
+function handleDescriptionToggle(e) {
+  const $item = $(e.target).closest(".todo-item");
+  const $content = $item.find(".todo-content");
+  const $icon = $item.find("i");
+  const isCollapsed = $content.hasClass("collapsed");
+
+  $content.toggleClass("collapsed", !isCollapsed);
+  $icon.toggleClass("fa-chevron-down fa-chevron-up");
+}
+
+async function handleTodoDelete(e) {
+  const $item = $(e.target).closest(".todo-item");
+  const todoId = $item.data("id");
+
+  await handleApiRequest(() =>
+    TodoAPI.delete(process.env.BASE_SERVICE_URL, todoId)
+  );
+  $item.fadeOut(300, function () {
+    $(this).remove();
+  });
+  await fetchTodos();
+}
+
+async function handleTodoEdit(e) {
+  const $item = $(e.target).closest(".todo-item");
+  const todoId = $item.data("id");
+  const isCompleted = $item.find(".todo-checkbox").is(":checked");
+  const currentTitle = $item.find(".todo-title").text();
+  const currentDescription = $item.find(".todo-description").text();
+
+  const $editForm = createEditForm(currentTitle, currentDescription);
+  $item.empty().append($editForm);
+
+  $editForm.find(".save-btn").on("click", async () => {
+    const updatedTitle = $editForm.find(".edit-input").eq(0).val();
+    const updatedDescription = $editForm.find(".edit-input").eq(1).val();
+
+    if (!updatedTitle) return;
+
+    const updatedData = {
+      title: updatedTitle,
+      description: updatedDescription,
+      completed: isCompleted,
+    };
+    await handleApiRequest(() =>
+      TodoAPI.update(process.env.BASE_SERVICE_URL, todoId, updatedData)
+    );
+
+    const todo = await TodoAPI.getById(process.env.BASE_SERVICE_URL, todoId);
+    const $updatedItem = createTodoItem(
+      todo._id,
+      todo.title,
+      todo.description,
+      todo.completed
+    );
+
+    $item.replaceWith($updatedItem);
+  });
+
+  $editForm.find(".cancel-btn").on("click", () => {
+    const $beforeUpdateItem = createTodoItem(
+      todoId,
+      currentTitle,
+      currentDescription,
+      isCompleted
+    );
+    $item.replaceWith($beforeUpdateItem);
+  });
+}
+
+async function handleApiRequest(apiCall) {
+  try {
+    await apiCall();
+  } catch (e) {
+    fetchErrorHandler(e);
+  }
+}
+
 async function fetchTodos() {
   view.renderLoader("loading");
 
@@ -166,4 +147,25 @@ function fetchErrorHandler(e) {
     view.clearRoot();
     view.renderError(e.message);
   }, 1000);
+}
+
+function createEditForm(title, description) {
+  return $("<div>")
+    .addClass("edit-form")
+    .append(
+      $("<label>").text("Task title:"),
+      $("<input>").attr("type", "text").val(title).addClass("edit-input"),
+      $("<label>").text("Task description:"),
+      $("<input>").attr("type", "text").val(description).addClass("edit-input"),
+      $("<div>")
+        .addClass("button-container")
+        .append(
+          $("<button>")
+            .addClass("save-btn")
+            .append($("<i>").addClass("fas fa-cloud-upload-alt").text(" Save")),
+          $("<button>")
+            .addClass("cancel-btn")
+            .append($("<i>").addClass("fas fa-arrow-left").text(" Cancel"))
+        )
+    );
 }
