@@ -15,9 +15,9 @@ export function createTodoItem(_id, title, description, completed) {
         .append($("<div>").addClass("todo-description").text(description)),
       $("<button>")
         .addClass("toggle-description")
-        .html("<i class='fas fa-chevron-down'></i>"),
-      $("<button>").addClass("edit-btn").html("✏️"),
-      $("<button>").addClass("delete-btn").html("🗑️")
+        .append($("<i>").addClass("fas fa-chevron-down")),
+      $("<button>").addClass("edit-btn").text("✏️"),
+      $("<button>").addClass("delete-btn").text("🗑️")
     );
   return $item;
 }

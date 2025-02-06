@@ -82,10 +82,10 @@ $(document).on("click", ".edit-btn", (e) => {
         .append(
           $("<button>")
             .addClass("save-btn")
-            .html("<i class='fas fa-cloud-upload-alt'></i> Save"),
+            .append($("<i>").addClass("fas fa-cloud-upload-alt").text(" Save")),
           $("<button>")
             .addClass("cancel-btn")
-            .html("<i class='fas fa-arrow-left'></i> Cancel")
+            .append($("<i>").addClass("fas fa-arrow-left").text(" Cancel"))
         )
     );
 
