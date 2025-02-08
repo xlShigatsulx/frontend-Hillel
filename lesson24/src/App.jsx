@@ -1,8 +1,6 @@
 import React from "react";
 
-export class App extends React.Component {
-  render() {
-    const data = `{
+const data = `{
   "name": "Luke Skywalker",
   "height": "172",
   "mass": "77",
@@ -31,6 +29,9 @@ export class App extends React.Component {
   "edited": "2014-12-20T21:17:56.891000Z",
   "url": "https://swapi.dev/api/people/1/"
 }`;
+
+export class App extends React.Component {
+  render() {
     return (
       <>
         <div className="container">
