@@ -1,33 +1,55 @@
 import React from "react";
 import { Result } from "./components";
+import { LocalStorage } from "./utils";
 import "./App.css";
 
 export class App extends React.Component {
-  state = {
-    emojis: ["😀", "😆", "😢", "😍", "😎"],
-    votes: [0, 0, 0, 0, 0],
-    showResult: false,
-  };
+  constructor(props) {
+    super(props);
+
+    const defaultEmojis = ["😀", "😆", "😢", "😍", "😎"];
+    const defaultVotes = Array(defaultEmojis.length).fill(0);
+
+    const { votes, emojis, showResult } = LocalStorage.loadData(
+      defaultVotes,
+      defaultEmojis
+    );
+
+    this.state = {
+      emojis,
+      votes,
+      showResult,
+    };
+  }
 
   voteHandler(index) {
     if (this.state.showResult) return;
-    this.setState((prevState) => {
-      const newVotes = [...prevState.votes];
-      newVotes[index] += 1;
-      return { votes: newVotes };
-    });
+
+    this.setState(
+      (prevState) => {
+        const newVotes = [...prevState.votes];
+        newVotes[index] += 1;
+        return { votes: newVotes };
+      },
+      () =>
+        LocalStorage.saveData(
+          this.state.votes,
+          this.state.emojis,
+          this.state.showResult
+        )
+    );
   }
 
   showResultHandler() {
-    this.setState(() => ({
-      showResult: true,
-    }));
+    this.setState({ showResult: true }, () => {
+      LocalStorage.saveData(this.state.votes, this.state.emojis, true);
+    });
   }
 
   resetResultHandler() {
-    this.setState({
-      votes: [0, 0, 0, 0, 0],
-      showResult: false,
+    const defaultVotes = Array(this.state.emojis.length).fill(0);
+    this.setState({ votes: defaultVotes, showResult: false }, () => {
+      LocalStorage.clearData();
     });
   }
 
@@ -49,20 +71,20 @@ export class App extends React.Component {
               <span key={index}>{count}</span>
             ))}
           </div>
-          <button
-            className="show-result-btn"
-            onClick={this.showResultHandler.bind(this)}
-          >
-            Показати результати
-          </button>
+          {!showResult && (
+            <button
+              className="show-result-btn"
+              onClick={this.showResultHandler.bind(this)}
+            >
+              Показати результати
+            </button>
+          )}
           {showResult && (
-            <>
-              <Result
-                votes={votes}
-                emojis={emojis}
-                onReset={this.resetResultHandler.bind(this)}
-              />
-            </>
+            <Result
+              votes={votes}
+              emojis={emojis}
+              onReset={this.resetResultHandler.bind(this)}
+            />
           )}
         </div>
       </>
