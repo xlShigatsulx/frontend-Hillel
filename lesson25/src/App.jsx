@@ -10,10 +10,11 @@ export class App extends React.Component {
     const defaultEmojis = ["😀", "😆", "😢", "😍", "😎"];
     const defaultVotes = Array(defaultEmojis.length).fill(0);
 
-    const { votes, emojis, showResult } = LocalStorage.loadData(
-      defaultVotes,
-      defaultEmojis
-    );
+    const { votes, emojis, showResult } = LocalStorage.loadData({
+      votes: defaultVotes,
+      emojis: defaultEmojis,
+      showResult: false,
+    });
 
     this.state = {
       emojis,
@@ -32,17 +33,21 @@ export class App extends React.Component {
         return { votes: newVotes };
       },
       () =>
-        LocalStorage.saveData(
-          this.state.votes,
-          this.state.emojis,
-          this.state.showResult
-        )
+        LocalStorage.saveData({
+          votes: this.state.votes,
+          emojis: this.state.emojis,
+          showResult: this.state.showResult,
+        })
     );
   }
 
   showResultHandler() {
     this.setState({ showResult: true }, () => {
-      LocalStorage.saveData(this.state.votes, this.state.emojis, true);
+      LocalStorage.saveData({
+        votes: this.state.votes,
+        emojis: this.state.emojis,
+        showResult: true,
+      });
     });
   }
 
@@ -50,6 +55,11 @@ export class App extends React.Component {
     const defaultVotes = Array(this.state.emojis.length).fill(0);
     this.setState({ votes: defaultVotes, showResult: false }, () => {
       LocalStorage.clearData();
+      LocalStorage.saveData({
+        votes: this.state.votes,
+        emojis: this.state.emojis,
+        showResult: true,
+      });
     });
   }
 

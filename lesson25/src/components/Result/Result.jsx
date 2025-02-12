@@ -7,7 +7,7 @@ export class Result extends React.Component {
     const maxVotes = Math.max(...votes);
     const winners = votes
       .map((votes, index) => (votes === maxVotes ? emojis[index] : null))
-      .filter(Boolean);
+      .filter((emoji) => emoji !== null);
     const hasVotes = maxVotes > 0;
     const winnerText = hasVotes ? winners.join(" ") : "❌";
     const winnerVotes = hasVotes ? maxVotes : 0;

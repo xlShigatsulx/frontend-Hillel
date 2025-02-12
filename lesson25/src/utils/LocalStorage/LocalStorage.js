@@ -1,24 +1,23 @@
 export class LocalStorage {
-  static saveData(votes, emojis, showResult) {
-    localStorage.setItem("votes", JSON.stringify(votes));
-    localStorage.setItem("emojis", JSON.stringify(emojis));
-    localStorage.setItem("showResult", JSON.stringify(showResult));
+  static KEYS = ["votes", "emojis", "showResult"];
+
+  static saveData(data) {
+    this.KEYS.forEach((key) => {
+      if (key in data) {
+        localStorage.setItem(key, JSON.stringify(data[key]));
+      }
+    });
   }
 
-  static loadData(defaultVotes, defaultEmojis) {
-    const savedVotes = localStorage.getItem("votes");
-    const savedEmojis = localStorage.getItem("emojis");
-    const savedShowResult = localStorage.getItem("showResult");
-    return {
-      votes: savedVotes ? JSON.parse(savedVotes) : defaultVotes,
-      emojis: savedEmojis ? JSON.parse(savedEmojis) : defaultEmojis,
-      showResult: savedShowResult ? JSON.parse(savedShowResult) : false,
-    };
+  static loadData(defaults) {
+    return this.KEYS.reduce((acc, key) => {
+      const savedValue = localStorage.getItem(key);
+      acc[key] = savedValue ? JSON.parse(savedValue) : defaults[key] ?? false;
+      return acc;
+    }, {});
   }
 
   static clearData() {
-    localStorage.removeItem("votes");
-    localStorage.removeItem("emojis");
-    localStorage.removeItem("showResult");
+    this.KEYS.forEach((key) => localStorage.removeItem(key));
   }
 }
