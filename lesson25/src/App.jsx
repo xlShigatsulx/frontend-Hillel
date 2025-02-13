@@ -58,7 +58,7 @@ export class App extends React.Component {
       LocalStorage.saveData({
         votes: this.state.votes,
         emojis: this.state.emojis,
-        showResult: true,
+        showResult: false,
       });
     });
   }
