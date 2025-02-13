@@ -1,0 +1,42 @@
+body {
+  font-family: "Lobster", cursive;
+}
+
+:root {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin-bottom: 15px;
+}
+
+button {
+  border: none;
+  background: none;
+  font-size: 60px;
+}
+
+.span-group {
+  font-size: 20px;
+}
+
+span {
+  margin: 0 42px;
+}
+
+.show-result-btn {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #67d467;
+  color: white;
+  border-radius: 25px;
+}

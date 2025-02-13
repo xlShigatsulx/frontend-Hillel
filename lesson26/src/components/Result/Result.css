@@ -1,0 +1,17 @@
+.reset-btn {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 20px;
+  background-color: #67d467;
+  color: white;
+  border-radius: 25px;
+}
+
+h4 {
+  margin: 0;
+}
+
+.winner-span {
+  font-size: 50px;
+  margin: 10px 0;
+}
