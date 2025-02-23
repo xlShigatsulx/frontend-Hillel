@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  img {
+    width: 70px;
+    height: 60px;
+  }
+  a {
+    text-decoration: none;
+    display: flex;
+    color: inherit;
+  }
+}
+
+.navigation {
+  flex: 1;
+}
