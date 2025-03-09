@@ -1,0 +1,29 @@
+@use "@services/style/_config.scss" as const;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  margin: 25px 0 10px;
+  width: 100%;
+  max-width: 330px;
+  align-self: center;
+  text-align: left;
+}
+
+.list {
+  margin: 0;
+  padding: const.$s;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: const.$m;
+  border-top: 1px solid gray;
+}
+
+.lengthList {
+  align-self: start;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "lesson31",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Shigatsu",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "service"
+  ],
+  "scripts": {
+    "start:server": "yarn workspace service run start:dev",
+    "start:frontend": "yarn workspace frontend run start"
+  }
+}

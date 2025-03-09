@@ -1,0 +1,30 @@
+.item {
+  display: flex;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid black;
+  color: black;
+  background-color: bisque;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.span {
+  margin-left: 5px;
+}
+
+.editBtn,
+.removeBtn {
+  background: none !important;
+  padding: 0;
+  font-size: 16px;
+}
+
+.editBtn {
+  margin-left: auto;
+  margin-right: 10px;
+}

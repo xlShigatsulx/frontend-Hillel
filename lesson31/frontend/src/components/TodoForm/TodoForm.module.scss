@@ -1,0 +1,32 @@
+@use "../../services/style/_config.scss" as config;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: config.$m;
+}
+
+.title {
+  margin: 50px 0 0;
+  width: 100%;
+  max-width: 320px;
+  align-self: center;
+  text-align: left;
+}
+
+.input {
+  flex: 1;
+  padding: config.$sm;
+  min-width: 0;
+}
+
+.form {
+  width: 100%;
+  align-self: center;
+  display: flex;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: white;
+}
