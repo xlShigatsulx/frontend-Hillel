@@ -51,7 +51,7 @@ export function Home() {
         <Typography variant="body2" color="textSecondary">
           Квітень 9999 - Теперішній час
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           Розробка та підтримка веб-застосунків з використанням React, Redux.
           Співпраця з командою дизайнерів для створення зручних інтерфейсів та
           оптимізації продуктивності.
@@ -67,7 +67,7 @@ export function Home() {
         <Typography variant="body2" color="textSecondary">
           ХНУРЕ, 2021 - 2025
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           Спеціалізація на розробці програмного забезпечення, алгоритмах та
           структурах даних. Участь у кількох конкурсах з програмування.
         </Typography>
