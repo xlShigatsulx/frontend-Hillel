@@ -80,3 +80,12 @@ todoController.delete("/todos/:id", async (req, res) => {
       .json({ error: `Failed to delete todo with id '${req.params.id}'.` });
   }
 });
+
+todoController.delete("/todos", async (req, res) => {
+  try {
+    await service.deleteAllTodos();
+    res.status(204).send("All todos deleted successfully");
+  } catch (e) {
+    res.status(500).json({ error: "Failed to delete all todos." });
+  }
+});

@@ -46,7 +46,7 @@ export class TodosService {
   async createTodo(todoData) {
     try {
       const todo = new todoModel({
-        _id: new mongoose.Types.ObjectId(),
+        //_id: new mongoose.Types.ObjectId(),
         ...todoData,
       });
       return await todo.save();
@@ -106,6 +106,23 @@ export class TodosService {
         stack: error.stack,
       });
       throw new Error("Failed to delete the todo.");
+    }
+  }
+
+  async deleteAllTodos() {
+    try {
+      const result = await todoModel.deleteMany({});
+      if (result.deletedCount === 0) {
+        Logger.warn("No todos found for deletion.");
+        throw new Error("No todos found for deletion.");
+      }
+      return result;
+    } catch (error) {
+      Logger.error("Error deleting all todos:", {
+        message: error.message,
+        stack: error.stack,
+      });
+      throw new Error("Failed to delete all todos.");
     }
   }
 }

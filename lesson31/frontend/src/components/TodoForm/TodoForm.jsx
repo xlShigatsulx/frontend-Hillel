@@ -1,14 +1,13 @@
 import { useRef } from "react";
-import { addTodo } from "@store";
-import { useDispatch } from "react-redux";
 import { TodoList } from "./TodoList";
 import { Button } from "@ui";
+import { useDispatch } from "react-redux";
+import { ADD_TODO } from "@store";
 
 import style from "./TodoForm.module.scss";
 
 export function TodoForm() {
   const todo = useRef(null);
-
   const dispatch = useDispatch();
 
   function submitHandler(e) {
@@ -20,8 +19,8 @@ export function TodoForm() {
       title: todo.current.value,
       completed: false,
     };
-
-    dispatch(addTodo(preparedData));
+    const controller = new AbortController();
+    dispatch(ADD_TODO({ data: preparedData, signal: controller.signal }));
     e.target.reset();
   }
 

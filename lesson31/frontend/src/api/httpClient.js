@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const baseURL = import.meta.env.VITE_BASE_SERVICE_URL;
-const axiosConf = (signal = {}) =>
+
+const axiosConf = () =>
   axios.create({
     baseURL,
-    signal,
     headers: {
       "Content-Type": "application/json",
     },
@@ -13,13 +13,14 @@ const axiosConf = (signal = {}) =>
 
 const genericRequest = async ({ requestType = "get", url, data, signal }) => {
   try {
-    const httpClient = axiosConf(signal);
-    const response = await httpClient[requestType](url, data);
-
+    const httpClient = axiosConf();
+    const response = await httpClient[requestType](url, { ...data, signal });
     return response.data;
   } catch (e) {
     if (axios.isAxiosError(e) && e.response) {
       console.error("Request error:", e.response);
+    } else if (e.name === "AbortError") {
+      console.log("Request aborted");
     } else {
       console.error(e);
       throw new Error("Unknown error.");

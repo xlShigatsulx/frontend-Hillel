@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  FETCH_TODOS_SUCCESS,
   FETCH_TODOS_LOADING,
+  FETCH_TODOS_SUCCESS,
   FETCH_TODOS_ERROR,
+  ADD_TODO_SUCCESS,
+  ADD_TODO_ERROR,
+  DELETE_TODO_SUCCESS,
+  DELETE_TODO_ERROR,
+  UPDATE_TODO_SUCCESS,
+  UPDATE_TODO_ERROR,
+  CLEAR_TODOS_SUCCESS,
+  CLEAR_TODOS_ERROR,
 } from "@store";
 
 const initialState = {
@@ -15,21 +23,7 @@ const todosSlice = createSlice({
   name: "todos",
   reducerPath: "todosSaga",
   initialState,
-  reducers: {
-    addTodo: (state, { payload }) => {
-      state.todos.push(payload);
-    },
-
-    removeTodo: (state, { payload }) => {
-      state.todos = [...state.todos].filter(({ _id }) => _id !== payload);
-    },
-
-    clearTodos: (state) => {
-      state.todos = initialState.todos;
-      state.error = initialState.error;
-      state.status = initialState.status;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(FETCH_TODOS_LOADING, (state) => {
@@ -42,6 +36,33 @@ const todosSlice = createSlice({
       .addCase(FETCH_TODOS_ERROR, (state, { payload }) => {
         state.status = "error";
         state.error = payload;
+      })
+      .addCase(ADD_TODO_SUCCESS, (state, { payload }) => {
+        state.todos.push(payload);
+      })
+      .addCase(ADD_TODO_ERROR, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(DELETE_TODO_SUCCESS, (state, { payload }) => {
+        state.todos = state.todos.filter((todo) => todo._id !== payload.id);
+      })
+      .addCase(DELETE_TODO_ERROR, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(UPDATE_TODO_SUCCESS, (state, { payload }) => {
+        const index = state.todos.findIndex((todo) => todo._id === payload._id);
+        if (index !== -1) {
+          state.todos[index] = payload;
+        }
+      })
+      .addCase(UPDATE_TODO_ERROR, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(CLEAR_TODOS_SUCCESS, (state) => {
+        state.todos = [];
+      })
+      .addCase(CLEAR_TODOS_ERROR, (state, { payload }) => {
+        state.error = payload;
       });
   },
   selectors: {
@@ -50,7 +71,7 @@ const todosSlice = createSlice({
   },
 });
 
-export const { addTodo, removeTodo, clearTodos } = todosSlice.actions;
+export const {} = todosSlice.actions;
 export const { selectTodos, selectStatus } = todosSlice.selectors;
 
 export default todosSlice.reducer;
