@@ -1,0 +1,46 @@
+@use "sass:meta";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+
+$font-primary: "Roboto", sans-serif;
+$c-danger: #b20000;
+$c-gray-light: #ccc;
+$c-light: white;
+$c-dark: #333;
+$c-black: #000617;
+$c-primary: #0dcaf0;
+$c-link: #0dcaf0;
+$c-link-hover: #009bb4;
+$sm: 4px;
+$s: 8px;
+$m: 12px;
+$lg: 16px;
+$xl: 20px;
+$xxl: 24px;
+
+.t-c {
+  text-align: center;
+}
+
+.m-sm {
+  margin: $sm;
+}
+
+.m-s {
+  margin: $s;
+}
+
+.m-m {
+  margin: $m;
+}
+
+.m-lg {
+  margin: $lg;
+}
+
+.m-xl {
+  margin: $xl;
+}
+
+.m-xxl {
+  margin: $xxl;
+}
