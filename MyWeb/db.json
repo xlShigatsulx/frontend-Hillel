@@ -1,0 +1,142 @@
+{
+  "analytics": [
+    {
+      "id": 1,
+      "analyticsData": {
+        "users": 5000,
+        "products": 120,
+        "totalSales": 3500,
+        "totalRevenue": 150000
+      },
+      "dailySalesData": [
+        {
+          "name": "2023-03-01",
+          "sales": 200,
+          "revenue": 5000
+        },
+        {
+          "name": "2023-03-02",
+          "sales": 220,
+          "revenue": 5500
+        },
+        {
+          "name": "2023-03-03",
+          "sales": 180,
+          "revenue": 4500
+        },
+        {
+          "name": "2023-03-04",
+          "sales": 300,
+          "revenue": 7500
+        },
+        {
+          "name": "2023-03-05",
+          "sales": 250,
+          "revenue": 6000
+        },
+        {
+          "name": "2023-03-06",
+          "sales": 280,
+          "revenue": 7000
+        },
+        {
+          "name": "2023-03-07",
+          "sales": 330,
+          "revenue": 8250
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "eafdd62eeefd0fda7dd6c9c5",
+      "name": "Fresh Metal Pants Croissant",
+      "price": 2,
+      "quantity": 1,
+      "description": "Innovative Salad featuring aggravating technology and Concrete construction",
+      "image": "https://loremflickr.com/3956/3510/food?lock=6453497074551993",
+      "category": "classic-croissants"
+    },
+    {
+      "id": "a219bdc56bf589bddb7d5874",
+      "name": "Handcrafted Metal Chair Croissant",
+      "price": 4.13,
+      "quantity": 1,
+      "description": "The sleek and frizzy Shoes comes with lime LED lighting for smart functionality",
+      "image": "https://loremflickr.com/1230/3593/food?lock=6980396628536081",
+      "category": "chocolate-croissants"
+    },
+    {
+      "id": "82a222b2adb6a4ff662ebeab",
+      "name": "Unbranded Steel Pants Croissant",
+      "price": 4.89,
+      "quantity": 1,
+      "description": "Pollich and Sons's most advanced Fish technology increases reflecting capabilities",
+      "image": "https://loremflickr.com/2670/874/food?lock=2160958013485585",
+      "category": "almond-croissants"
+    },
+    {
+      "id": "619febc5a8cd2e0a8e6cd5bf",
+      "name": "Modern Plastic Soap Croissant",
+      "price": 3.23,
+      "quantity": 1,
+      "description": "Harris - Heidenreich's most advanced Table technology increases sunny capabilities",
+      "image": "https://loremflickr.com/919/1050/food?lock=3689251774524148",
+      "category": "fruit-croissants"
+    },
+    {
+      "id": "17af3870a112b9e1c59ec6e5",
+      "name": "Luxurious Wooden Tuna Croissant",
+      "price": 3.85,
+      "quantity": 1,
+      "description": "Professional-grade Cheese perfect for wilted training and recreational use",
+      "image": "https://loremflickr.com/1866/2174/food?lock=137659025904382",
+      "category": "mini-croissants"
+    },
+    {
+      "id": "a6dd2dbb6ab00c8efc79c1a4",
+      "name": "Rustic Cotton Keyboard Croissant",
+      "price": 1.76,
+      "quantity": 1,
+      "description": "Our giraffe-friendly Fish ensures clear-cut comfort for your pets",
+      "image": "https://loremflickr.com/170/1089/food?lock=2865077176220352",
+      "category": "savory-croissants"
+    },
+    {
+      "id": "bb05b3c46bb5c764c35afbdd",
+      "name": "Tasty Ceramic Shoes Croissant",
+      "price": 2.16,
+      "quantity": 1,
+      "description": "The Reece Keyboard is the latest in a series of rough products from Waters Inc",
+      "image": "https://loremflickr.com/2946/1911/food?lock=2371162259527778",
+      "category": "special-croissants"
+    },
+    {
+      "id": "816e0eedab22807dcdc5c67b",
+      "name": "Bespoke Steel Shoes Croissant",
+      "price": 4.83,
+      "quantity": 1,
+      "description": "Introducing the Ireland-inspired Keyboard, blending happy-go-lucky style with local craftsmanship",
+      "image": "https://loremflickr.com/2486/2519/food?lock=5088487081402430",
+      "category": "special-croissants"
+    },
+    {
+      "id": "dfaff83fb0877b5b255acbaf",
+      "name": "Fresh Concrete Ball Croissant",
+      "price": 4.22,
+      "quantity": 1,
+      "description": "Discover the tiger-like agility of our Chicken, perfect for aching users",
+      "image": "https://loremflickr.com/332/168/food?lock=1913918072469176",
+      "category": "special-croissants"
+    }
+  ],
+  "users": [
+    {
+      "email": "05rustik04@gmail.com",
+      "password": "$2a$10$7qoIF8LZXTmDwvEnhZPF5.D6aSeS7OI6x0zRRpLxmbhPbi/unLT5W",
+      "name": "Ruslan",
+      "id": 1,
+      "role": "admin"
+    }
+  ]
+}
