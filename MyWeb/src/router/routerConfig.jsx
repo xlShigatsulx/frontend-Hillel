@@ -7,15 +7,11 @@ import {
   AdminPage,
   CartPage,
   CategoryPage,
+  AboutPage,
+  ShopPage,
+  BlogsPage,
+  ContactPage,
 } from '@pages';
-
-const ProtectedRoute = ({ user, element }) => {
-  return user ? element : <Navigate to="/login" />;
-};
-
-const AdminRoute = ({ user, element }) => {
-  return user?.role === 'admin' ? element : <Navigate to="/login" />;
-};
 
 export const router = (user) =>
   createBrowserRouter([
@@ -25,22 +21,34 @@ export const router = (user) =>
       id: 'root',
       children: [
         { index: true, element: <HomePage /> },
+        { path: 'about', element: <AboutPage /> },
+        { path: 'shop', element: <ShopPage /> },
+        { path: 'blogs', element: <BlogsPage /> },
+        { path: 'contact', element: <ContactPage /> },
+        {
+          path: 'secret-dashboard',
+          element:
+            user && user?.role === 'admin' ? (
+              <AdminPage />
+            ) : (
+              <Navigate to="/login" />
+            ),
+        },
         {
           path: 'signup',
           element: !user ? <SignUpPage /> : <Navigate to="/" />,
         },
-        { path: 'login', element: !user ? <LoginPage /> : <Navigate to="/" /> },
         {
-          path: 'secret-dashboard',
-          element: <AdminRoute user={user} element={<AdminPage />} />,
+          path: 'login',
+          element: !user ? <LoginPage /> : <Navigate to="/" />,
+        },
+        {
+          path: 'cart',
+          element: user ? <CartPage /> : <Navigate to="/" />,
         },
         {
           path: ':category',
           element: <CategoryPage />,
-        },
-        {
-          path: 'cart',
-          element: <ProtectedRoute user={user} element={<CartPage />} />,
         },
       ],
     },

@@ -17,7 +17,7 @@ export function EmptyCartUI() {
       </p>
       <Link
         className="mt-4 rounded-md bg-gray-500 px-6 py-2 text-white hover:bg-gray-600"
-        to="/"
+        to="/shop"
       >
         Start Shopping
       </Link>

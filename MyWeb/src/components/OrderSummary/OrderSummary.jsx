@@ -59,7 +59,7 @@ export function OrderSummary() {
         <div className="flex items-center justify-center gap-2">
           <span className="text-sm font-normal text-gray-400">or</span>
           <Link
-            to="/"
+            to="/shop"
             className="inline-flex items-center gap-2 text-sm font-medium text-emerald-400 underline hover:text-emerald-300 hover:no-underline"
           >
             Continue Shopping

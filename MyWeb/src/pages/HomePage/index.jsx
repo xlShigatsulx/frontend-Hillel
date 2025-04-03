@@ -1,65 +1,70 @@
-import { Footer, Header, PageLayout, CategoryItem } from '@components';
-
-const categories = [
-  {
-    href: '/classic-croissants',
-    name: 'Класичні круасани',
-    imageUrl: '/public/Класичні.jpg',
-  },
-  {
-    href: '/chocolate-croissants',
-    name: 'Шоколадні круасани',
-    imageUrl: '/public/Шоколадні.jpg',
-  },
-  {
-    href: '/almond-croissants',
-    name: 'Мигдальні круасани',
-    imageUrl: '/public/Мигдальні.jpg',
-  },
-  {
-    href: '/fruit-croissants',
-    name: 'Фруктові круасани',
-    imageUrl: '/public/Фруктові.jpg',
-  },
-  {
-    href: '/mini-croissants',
-    name: 'Міні-круасани',
-    imageUrl: '/public/mini.jpg',
-  },
-  {
-    href: '/savory-croissants',
-    name: 'Солоні круасани',
-    imageUrl: '/public/Солоні.jpg',
-  },
-  {
-    href: '/special-croissants',
-    name: 'Особливі круасани',
-    imageUrl: '/public/Особливі.jpg',
-  },
-];
+import { Footer, Header, PageLayout, CategorySlider } from '@components';
+import { useNavigate } from 'react-router-dom';
 
 export function HomePage() {
+  const navigate = useNavigate();
+
+  const handleShopRedirect = () => {
+    navigate('/shop');
+  };
+
   return (
     <PageLayout
       renderHeader={() => <Header />}
       renderContent={() => (
-        <div className="relative min-h-screen text-white overflow-hidden">
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <h1 className="text-center text-5xl sm:text-6xl font-bold text-amber-900 mb-4">
-              Світ круасанів
-            </h1>
-            <p className="text-center text-xl text-amber-500 mb-12">
-              Насолоджуйтесь ароматними та хрусткими круасанами, як у справжній
-              французькій пекарні! 🍪🥐
-            </p>
+        <>
+          <div className='w-full h-170 bg-[url("/banner.jpg")] bg-cover bg-center'>
+            <div className="pl-50 pt-40">
+              <p className="text-2xl text-orange-600 ">Отримай знижку 30%</p>
+              <p className="text-7xl text-white mb-20">
+                На свіжі
+                <br /> хлібобулочні
+                <br /> вироби
+              </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {categories.map((category) => (
-                <CategoryItem category={category} key={category.name} />
-              ))}
+              <button
+                onClick={handleShopRedirect}
+                className="text-white bg-amber-600 p-2 rounded-2xl hover:bg-amber-700 hover:text-gray-300 duration-300 ease-in-out"
+              >
+                Перейти до покупки
+              </button>
             </div>
           </div>
-        </div>
+
+          <CategorySlider />
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-50 text-center md:text-left bg-amber-500 px-32 py-32">
+            <div className="flex items-center md:items-start mb-12 md:mb-0">
+              <div className="w-20 h-20 flex items-center justify-center rounded-full border-2 border-white mr-6">
+                🚚
+              </div>
+              <div>
+                <h3 className="font-bold text-2xl">Безкоштовна доставка</h3>
+                <p className="text-lg">TEXT</p>
+              </div>
+            </div>
+
+            <div className="flex items-center md:items-start mb-12 md:mb-0">
+              <div className="w-20 h-20 flex items-center justify-center rounded-full border-2 border-white mr-6">
+                📞
+              </div>
+              <div>
+                <h3 className="font-bold text-2xl">Допомога 24/7</h3>
+                <p className="text-lg">TEXT</p>
+              </div>
+            </div>
+
+            <div className="flex items-center md:items-start">
+              <div className="w-20 h-20 flex items-center justify-center rounded-full border-2 border-white mr-6">
+                💳
+              </div>
+              <div>
+                <h3 className="font-bold text-2xl">Безпечна оплата</h3>
+                <p className="text-lg">TEXT</p>
+              </div>
+            </div>
+          </div>
+        </>
       )}
       renderFooter={() => <Footer />}
     />

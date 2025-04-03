@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { LogIn, ArrowRight, Loader } from 'lucide-react';
@@ -18,6 +18,7 @@ export function LoginPage() {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+  const { user } = useUserStore();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,11 +44,16 @@ export function LoginPage() {
       const controller = new AbortController();
       await login({ email, password }, controller.signal);
       setFormData({ email: '', password: '' });
-      navigate('/', { replace: true });
     } catch (error) {
       toast.error('Login failed. Please check your credentials.');
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user]);
 
   return (
     <PageLayout

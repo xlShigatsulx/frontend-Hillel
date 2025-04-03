@@ -5,7 +5,7 @@ import { useProductStore } from '@store';
 export function ProductsList() {
   const { deleteProduct, products } = useProductStore();
 
-  const defaultImage = '/public/Класичні.jpg';
+  const defaultImage = '/Класичні.jpg';
 
   return (
     <motion.div

@@ -11,7 +11,7 @@ export const useUserStore = create((set) => ({
     set({ loading: true });
     try {
       const data = await signupApi({ name, email, password }, signal);
-      set({ user: data, loading: false });
+      set({ user: data.user, loading: false });
       localStorage.setItem('user', JSON.stringify(data));
     } catch (error) {
       set({ loading: false });
@@ -23,8 +23,8 @@ export const useUserStore = create((set) => ({
     set({ loading: true });
     try {
       const data = await loginApi({ email, password }, signal);
+      set({ user: data.user, loading: false });
       localStorage.setItem('user', JSON.stringify(data));
-      set({ user: data, loading: false });
     } catch (error) {
       set({ loading: false });
       toast.error(error?.message || 'Login failed');
@@ -44,7 +44,7 @@ export const useUserStore = create((set) => ({
     try {
       const localUser = JSON.parse(localStorage.getItem('user'));
       if (localUser) {
-        set({ user: localUser });
+        set({ user: localUser.user });
       }
     } catch (error) {
       console.error('Error parsing user data from localStorage:', error);

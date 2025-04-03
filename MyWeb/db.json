@@ -137,6 +137,12 @@
       "name": "Ruslan",
       "id": 1,
       "role": "admin"
+    },
+    {
+      "email": "krammlucky@gmail.com",
+      "password": "$2a$10$.l6.yqkpBMP1Of4dmq4vZe0sonO/6CMsT/z.FX/QtcnqbT4mZKVRi",
+      "name": "Ruslan2.0",
+      "id": 2
     }
   ]
 }

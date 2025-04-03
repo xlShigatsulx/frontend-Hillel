@@ -18,6 +18,7 @@ export function AdminPage() {
   useEffect(() => {
     const controller = new AbortController();
     fetchAllProducts(controller.signal);
+    return () => controller.abort();
   }, [fetchAllProducts]);
 
   return (

@@ -1,12 +1,11 @@
-import { Footer, Header, PageLayout } from "@components";
-import { useState } from "react";
-import style from "./ContactsPage.module.scss";
+import { Footer, Header, PageLayout } from '@components';
+import { useState } from 'react';
 
-export function ContactsPage() {
+export function ContactPage() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: '',
+    email: '',
+    message: '',
   });
 
   const handleChange = (e) => {
@@ -15,19 +14,19 @@ export function ContactsPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Send Data:", formData);
-    setFormData({ name: "", email: "", message: "" });
+    console.log('Send Data:', formData);
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
     <PageLayout
       renderHeader={() => <Header />}
       renderContent={() => (
-        <div className={style.container}>
+        <div>
           <h1>Контакти</h1>
           <p>Зв'яжіться з нами, використовуючи форму нижче.</p>
 
-          <form className={style.form} onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <span>Ім'я:</span>
             <input
               type="text"

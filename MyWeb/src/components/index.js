@@ -10,3 +10,4 @@ export * from './CreateProductForm';
 export * from './OrderSummary';
 export * from './ProductCard';
 export * from './ProductsList';
+export * from './CategorySlider';

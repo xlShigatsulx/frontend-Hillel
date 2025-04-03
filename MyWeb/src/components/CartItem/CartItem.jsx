@@ -1,5 +1,6 @@
 import { Minus, Plus, Trash } from 'lucide-react';
 import { useCartStore } from '@store';
+import { toast } from 'react-hot-toast';
 
 export function CartItem({ item }) {
   const { removeFromCart, updateQuantity } = useCartStore();
