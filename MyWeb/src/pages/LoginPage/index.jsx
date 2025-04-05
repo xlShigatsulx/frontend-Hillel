@@ -53,7 +53,7 @@ export function LoginPage() {
     if (user) {
       navigate('/');
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return (
     <PageLayout

@@ -24,10 +24,10 @@ export function ContactPage() {
       renderContent={() => (
         <div>
           <h1>Контакти</h1>
-          <p>Зв'яжіться з нами, використовуючи форму нижче.</p>
+          <p>Зв&apos;яжіться з нами, використовуючи форму нижче.</p>
 
           <form onSubmit={handleSubmit}>
-            <span>Ім'я:</span>
+            <span>Ім&apos;я:</span>
             <input
               type="text"
               name="name"
