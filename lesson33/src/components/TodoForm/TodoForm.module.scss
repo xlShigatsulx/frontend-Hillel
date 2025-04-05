@@ -1,0 +1,38 @@
+.todoContainer {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: gray;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.todoInput {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.inputField {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 0;
+}
+
+.todoInput div {
+  flex: 1;
+  display: flex;
+}
+
+.addButton {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+
+  &:hover {
+    background: #0056b3;
+  }
+}

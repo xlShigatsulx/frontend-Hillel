@@ -1,0 +1,22 @@
+.todoList {
+  list-style: none;
+  padding: 0;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  color: #000000;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.deleteButton {
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+}
