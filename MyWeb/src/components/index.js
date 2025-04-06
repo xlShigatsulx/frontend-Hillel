@@ -15,3 +15,4 @@ export * from './AboutUs';
 export * from './TeamMembers';
 export * from './CustomersFeedBack';
 export * from './ContactForm';
+export * from './ShopSearch';

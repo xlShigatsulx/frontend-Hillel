@@ -3,7 +3,6 @@ export * from './ContactPage';
 export * from './AboutPage';
 export * from './AdminPage';
 export * from './CartPage';
-export * from './CategoryPage';
 export * from './HomePage';
 export * from './LoginPage';
 export * from './SignUpPage';

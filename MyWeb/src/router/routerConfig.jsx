@@ -6,7 +6,6 @@ import {
   LoginPage,
   AdminPage,
   CartPage,
-  CategoryPage,
   AboutPage,
   ShopPage,
   BlogsPage,
@@ -45,10 +44,6 @@ export const router = (user) =>
         {
           path: 'cart',
           element: user ? <CartPage /> : <Navigate to="/" />,
-        },
-        {
-          path: ':category',
-          element: <CategoryPage />,
         },
       ],
     },

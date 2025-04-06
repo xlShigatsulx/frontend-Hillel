@@ -86,11 +86,15 @@ export function CategorySlider() {
         afterChange={(index) => setCurrentSlide(index)}
         className="px-25 pt-20 pb-10"
       >
-        {categories.map((category) => (
-          <div key={category.name} className="text-center px-10">
-            <CategoryItem category={category} />
-          </div>
-        ))}
+        {categories && categories.length > 0 ? (
+          categories.map((category) => (
+            <div key={category.name} className="text-center px-10">
+              <CategoryItem category={category} />
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 italic">Категорії відсутні</p>
+        )}
       </Slider>
       <div className="flex gap-10 justify-center mb-10">
         <button
