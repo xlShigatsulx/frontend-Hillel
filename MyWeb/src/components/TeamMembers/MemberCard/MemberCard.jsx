@@ -7,7 +7,6 @@ export function MemberCard({ member }) {
           src={member.image}
           alt={member.name}
         />
-        <div className="absolute inset-0 bg-black bg-opacity-20" />
       </div>
 
       <div className="mt-4 px-5 pb-5">
