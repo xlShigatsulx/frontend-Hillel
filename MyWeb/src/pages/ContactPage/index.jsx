@@ -1,60 +1,27 @@
-import { Footer, Header, PageLayout } from '@components';
-import { useState } from 'react';
+import { Footer, Header, PageLayout, ContactForm } from '@components';
 
 export function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Send Data:', formData);
-    setFormData({ name: '', email: '', message: '' });
-  };
-
   return (
     <PageLayout
       renderHeader={() => <Header />}
       renderContent={() => (
-        <div>
-          <h1>Контакти</h1>
-          <p>Зв&apos;яжіться з нами, використовуючи форму нижче.</p>
+        <div className="mb-10">
+          <div className='w-full h-130 bg-[url("/bg.jpg")] bg-repeat bg-center'>
+            <span className="flex text-7xl text-amber-800 justify-center pt-50">
+              Contact Us
+            </span>
+          </div>
+          <div className="flex justify-center mt-10 px-25">
+            <img src="/testgeolockimg.png" className="w-90 h-140 mt-20" />
+            <div className="flex flex-col ml-15">
+              <span className="text-amber-500 text-center w-[150px] p-2 rounded-full shadow-xl">
+                CONTACT US
+              </span>
+              <p className="text-4xl mt-10">Як ми можемо допомгти?</p>
 
-          <form onSubmit={handleSubmit}>
-            <span>Ім&apos;я:</span>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-
-            <span>Email:</span>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-
-            <span>Повідомлення:</span>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            />
-
-            <button type="submit">Надіслати</button>
-          </form>
+              <ContactForm />
+            </div>
+          </div>
         </div>
       )}
       renderFooter={() => <Footer />}

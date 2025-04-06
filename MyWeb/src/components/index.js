@@ -11,3 +11,7 @@ export * from './OrderSummary';
 export * from './ProductCard';
 export * from './ProductsList';
 export * from './CategorySlider';
+export * from './AboutUs';
+export * from './TeamMembers';
+export * from './CustomersFeedBack';
+export * from './ContactForm';

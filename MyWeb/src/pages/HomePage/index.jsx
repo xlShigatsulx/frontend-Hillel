@@ -24,7 +24,7 @@ export function HomePage() {
 
               <button
                 onClick={handleShopRedirect}
-                className="text-white bg-amber-600 p-2 rounded-2xl hover:bg-amber-700 hover:text-gray-300 duration-300 ease-in-out"
+                className="text-white bg-amber-600 p-2 rounded-full hover:bg-amber-700 hover:text-gray-300 duration-300 ease-in-out"
               >
                 Перейти до покупки
               </button>
