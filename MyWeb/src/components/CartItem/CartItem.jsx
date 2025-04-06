@@ -46,7 +46,7 @@ export function CartItem({ item }) {
           </p>
           <p className="text-sm text-gray-400">{item.description}</p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 text-white">
             <button onClick={() => handleRemoveFromCart(item.id)}>
               <Trash />
             </button>

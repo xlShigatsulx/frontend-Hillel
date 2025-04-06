@@ -17,7 +17,7 @@ export function ContactPage() {
               <span className="text-amber-500 text-center w-[150px] p-2 rounded-full shadow-xl">
                 CONTACT US
               </span>
-              <p className="text-4xl mt-10">Як ми можемо допомгти?</p>
+              <p className="text-4xl mt-10">Як ми можемо допомогти?</p>
 
               <ContactForm />
             </div>

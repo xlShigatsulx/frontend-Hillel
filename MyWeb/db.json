@@ -143,6 +143,12 @@
       "password": "$2a$10$.l6.yqkpBMP1Of4dmq4vZe0sonO/6CMsT/z.FX/QtcnqbT4mZKVRi",
       "name": "Ruslan2.0",
       "id": 2
+    },
+    {
+      "email": "alextensey@gmail.com",
+      "password": "$2a$10$vQl79y2AT5v3hk7vFXplfeZa6Iu9Z0kjAasoxopSi9YU01vxCQkEu",
+      "name": "Luda",
+      "id": 3
     }
   ]
 }
